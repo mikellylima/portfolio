@@ -35,7 +35,8 @@ html {
 /*A fonte do html por padrão é 16px e 62.5% equivale a 10px*/
 
 body {
-  color: var(--bg-color);
+  color: var(--white-color);
+  background: var(--bg-colors);
 }
 
 header {
