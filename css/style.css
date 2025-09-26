@@ -10,6 +10,17 @@
   font-family: "Poppins", sans-serif;
 }
 
+/*
+* {
+  margin: 0;                * remove as margens padrão dos elementos
+  padding: 0;               * remove os espaçamentos internos padrão
+  box-sizing: border-box;   * inclui borda e padding no cálculo do tamanho
+  text-decoration: none;    * tira sublinhado de links e decorações de texto
+  border: none;             * remove bordas padrão de inputs, botões etc.
+  outline: none;            * remove contorno azul de foco (ex: inputs clicados)
+  font-family: "Poppins", sans-serif; * define a fonte padrão da página
+}*/
+
 :root {
   --bg-color: #1f242d;
   --second-bg-color: #323946;
@@ -21,9 +32,10 @@
 html {
   font-size: 62.5%;
 }
+/*A fonte do html por padrão é 16px e 62.5% equivale a 10px*/
 
 body {
-  color: var(--white-color);
+  color: var(--bg-color);
 }
 
 header {
