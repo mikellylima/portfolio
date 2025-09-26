@@ -41,3 +41,7 @@ O formulário está configurado para simulação local. Para ativar de verdade:
 ---
 
 ✨ Feito com HTML, CSS e JavaScript simples para ser rápido, responsivo e fácil de manter.
+
+
+### Dúvidas
+- Não entendi o que é overflow.
