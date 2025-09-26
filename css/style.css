@@ -36,7 +36,7 @@ html {
 
 body {
   color: var(--white-color);
-  background: var(--bg-colors);
+  background: var(--bg-color);
 }
 
 header {
