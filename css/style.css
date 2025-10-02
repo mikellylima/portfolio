@@ -701,7 +701,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 
 
 /* breakpoints */
-/*
+
 @media screen and (max-width: 1200px) {
   html {
     font-size: 55%;
@@ -824,4 +824,3 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
     font-size: 3.5rem;
   }
 }
-*/
