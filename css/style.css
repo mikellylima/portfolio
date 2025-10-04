@@ -82,12 +82,30 @@ header.active {
   animation-delay: 1.2s ;
 }
 
+/*
+animation: show-header 1.5s linear forwards;
+  * show-header → é o nome da animação definida em @keyframes.
+  * 1.5s → duração da animação.
+  * linear → velocidade constante (sem aceleração).
+  * forwards → mantém o estado final da animação (não volta ao original).
+
+animation-delay: 1.2s;
+  * a animação só começa 1,2 segundos depois que o header ganhar a classe .active.
+*/
+
+
 @keyframes show-header {
   100% {
     visibility: visible;
     opacity: 1;
   }
 }
+
+/*
+Aqui só foi definido o estado final (100%):
+  * visibility: visible; → torna o elemento visível.
+  * opacity: 1; → deixa totalmente opaco (sem transparência).
+*/
 
 .logo {
   font-size: 3rem;
@@ -119,26 +137,31 @@ nav a.active      * Seleciona o link que tem a classe .active
 }
 
 .bars-box {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
+  position: absolute;  /* posiciona o elemento de forma absoluta em relação ao ancestral com position: relative. Se o .pai não tiver position: relative, o .filho seria posicionado em relação à página inteira (body/html) */
+  width: 100%;         /* ocupa toda a largura do elemento pai */
+  height: 100%;        /* ocupa toda a largura do elemento pai */
+  display: flex;       /* organiza os elementos filhos em linha, usando flexbox */
 }
 
 .bars-box .bar {
   width: 100%;
   height: 100%;
   background: var(--bg-color);
-  animation: hide-bars .5s ease-in-out both;
-  animation-delay: calc(.1s * var(--i));
+  animation: hide-bars .5s ease-in-out both; /* aplica a animação chamada "hide-bars"
+                                                duração: 0.5 segundos
+                                                aceleração: ease-in-out (suave no início e no fim)
+                                                "both" = mantém o estilo do início e do fim */
+  animation-delay: calc(.1s * var(--i));     /* atraso da animação, calculado de acordo com a variável --i 
+                                                (geralmente usada para criar um efeito em sequência: 
+                                                barra 1 começa em 0.1s, barra 2 em 0.2s, barra 3 em 0.3s, etc.) */
 }
 
 @keyframes hide-bars {
   0% {
-    transform: translateY(0);
+    transform: translateY(0);    /* posição inicial: barra normal, sem deslocamento */
   }
   100% {
-    transform: translateY(100%);
+    transform: translateY(100%); /* posição final: barra deslizada 100% para baixo, desaparecendo */
   }
 }
 
@@ -149,10 +172,10 @@ nav a.active      * Seleciona o link que tem a classe .active
 
 @keyframes show-bars {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(-100%); /* começa fora da tela, vindo de cima */
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0);     /* termina na posição original, visível */
   }
 }
 
@@ -167,21 +190,24 @@ section {
 }
 
 section.active {
-  animation: show-content 1.5s linear forwards;
-  animation-delay: 1.6s;
+  animation: show-content 1.5s linear forwards;  /* aplica a animação chamada show-content
+                                                    duração: 1.5 segundos
+                                                    linear = velocidade constante
+                                                    forwards = mantém o estado final da animação */
+  animation-delay: 1.6s;   /* espera 1,6 segundos antes de iniciar a animação */
 }
 
 @keyframes show-content {
   100% {
-    visibility: visible;
-    opacity: 1;
-    overflow: auto;
+    visibility: visible;   /* garante que a section fique visível no fim */
+    opacity: 1;            /* deixa a section totalmente opaca */
+    overflow: auto;        /* permite rolagem se o conteúdo ultrapassar os limites */
   }
 }
 
 .home {
-  display: flex;
-  align-items: center;
+  display: flex;          /* transforma o container em flexbox, permitindo organizar os filhos em linha (horizontal) */
+  align-items: center;    /* alinha verticalmente os elementos ao centro do container */
   gap: 5rem;              /* espaçamento de 5rem entre cada elemento filho */
 }
 
@@ -197,7 +223,12 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 */
 
 .home-detail h2 {
-  display: inline-block;   /* faz o h2 se comportar como um bloco **inline**, permitindo definir largura, altura e margens, mas sem quebrar linha automaticamente */
+  display: inline-block;   /* faz o h2 se comportar como um bloco inline, permitindo definir largura, altura e margens, mas sem quebrar linha automaticamente */
+  font-size: 3.2rem;
+  margin-top: -1rem;       /* recua o h2 1rem para cima, útil para ajustar sobreposição ou alinhamento com outros elementos */
+}
+
+.home-detail h2 p {
   font-size: 3.2rem;
   margin-top: -1rem;       /* recua o h2 1rem para cima, útil para ajustar sobreposição ou alinhamento com outros elementos */
 }
@@ -237,76 +268,64 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
   }
 }
 
+
 .home-detail p {
   font-size: 1.6rem;
   margin: 1rem 0 2.5rem;    /* margem: 1rem topo, 0 laterais, 2.5rem base */
 }
 
 .home-detail .btn-sci {
-  display: flex;
-  align-items: center;
+  display: flex;             /* coloca os elementos filhos lado a lado */
+  align-items: center;       /* alinha os itens verticalmente no centro */
 }
 
-.btn {
-  display: inline-block;
-  padding: 1rem 3rem;
-  background: var(--main-color);
-  border: .2rem solid var(--main-color);
-  border-radius: 4rem;
-  box-shadow: 0 0 1rem var(--main-color);
-  font-size: 1.6rem;
-  color: var(--bg-color);
-  font-weight: 500;
-  transition: .5s;
-}
-
-.btn:hover {
-  background: transparent;
-  color: var(--main-color);
-  box-shadow: none;
-}
+/*
+display: block - ocupada toda a tela. Div, títulos, parágrafos, form, header, footer e scection vem como padrão display do tipo block
+display: inline - elemento não inicia numa nova linha nem ocupa toda a extensão da página, mas ocupa a extensão na mesma linha na largura do conteúdo dela. Tags a, span, image vem por padrão inline.
+*/
 
 .home-detail .btn-sci .sci {
   margin-left: 2rem;
 }
 
 .home-detail .btn-sci .sci a {
-  display: inline-block;
-  padding: .8rem;
-  border: .2rem solid var(--main-color);
-  border-radius: 50%;
-  font-size: 2rem;
-  color: var(--main-color);
-  margin: 0 .8rem;
-  transition: .5s;
+  display: inline-block;                 /* faz o link se comportar como bloco em linha, permitindo largura, altura e padding */
+  padding: .8rem;                        /* adiciona espaço interno ao redor do ícone, aumentando a área clicável */
+  border: .2rem solid var(--main-color); /* cria uma borda circular colorida usando a variável CSS --main-color */
+  border-radius: 50%;                    /* deixa a borda completamente arredondada, formando um círculo */
+  font-size: 2rem;                       /* aumenta o tamanho do ícone (caso seja uma fonte de ícone como FontAwesome) */
+  color: var(--main-color);              /* define a cor do ícone inicialmente */
+  margin: 0 .8rem;                       /* adiciona espaço horizontal entre os links */
+  transition: .5s;                       /* suaviza mudanças de estilo, como no hover */
 }
 
 .home-detail .btn-sci .sci a:hover {
   background: var(--main-color);
   color: var(--bg-color);
-  box-shadow: 0 0 1rem var(--main-color);
+  box-shadow: 0 0 1rem var(--main-color); /*0: deslocamento horizontal da sombra; 0: deslocamento vertical da sombra; 1rem → blur radius (desfoque da sombra, maior valor = sombra mais difusa)*/
 }
 
 .home-img .img-box {
-  position: relative;
-  width: 32vw;
-  height: 32vw;
-  border-radius: 50%;
-  padding: .5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  position: relative;           /* permite posicionamento absoluto de elementos filhos dentro da caixa */
+  width: 32vw;                  /* largura igual a 32% da largura da viewport */
+  height: 32vw;                 /* largura igual a 32% da altura da viewport */
+  border-radius: 50%;           /* deixa o container completamente circular */
+  padding: .5rem;               /* espaço interno ao redor do conteúdo (imagem) */
+  display: flex;                /* ativa flexbox para organizar o conteúdo internamente */
+  justify-content: center;      /* alinha horizontalmente o conteúdo ao centro */
+  align-items: center;          /* alinha verticalmente o conteúdo ao centro */
+  overflow: hidden;             /* corta qualquer conteúdo que ultrapasse os limites circulares */
 }
 
 .home-img .img-box::before,
 .home-img .img-box::after {
-  content: '';
-  position: absolute;
-  width: 50rem;
-  height: 50rem;
+  content: '';                        /* necessário para que o pseudo-elemento exista */
+  position: absolute;                 /* permite posicionamento sobre o container */
+  width: 32vw;
+  height: 32vw;
   background: conic-gradient(transparent, transparent, transparent, var(--main-color));
-  transform: rotate(0deg);
+  /* cria um efeito de borda circular colorida que parece um arco girando */
+  transform: rotate(0deg);            
   animation: rotate-border 10s linear infinite;
 }
 
@@ -334,12 +353,12 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 }
 
 .home-img .img-box .img-item img {
-  position: absolute;
-  top: 3rem;
-  display: block;
-  width: 85%;
-  object-fit: cover;
-  mix-blend-mode: lighten;
+  position: absolute;           /* tira a imagem do fluxo normal e permite posicioná-la em relação ao container pai (.img-box) */
+  top: 3rem;                    /* distancia 3rem do topo do container pai */
+  display: block;               /* transforma a imagem em bloco, eliminando espaços em linha que o img teria por padrão */
+  width: 85%;                   /* a imagem ocupa 85% da largura do container pai */
+  object-fit: cover;            /* mantém proporção da imagem, cortando partes se necessário para preencher o espaço */
+  mix-blend-mode: lighten;      /* mistura visual da imagem com o fundo: clareia as áreas combinadas com o fundo */
 }
 
 .heading {
@@ -371,7 +390,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 }
 
 .resume-box .desc {
-  margin: 2rem 0 2.5rem;
+  margin: 2rem 0 2.5rem; /* 2rem: margem superior; 0: margem direita e esquerda; 2.5rem: margem inferior*/
 }
 
 .resume-box .resume-btn {
@@ -408,9 +427,11 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 .resume-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  gap: 2rem;
+  /* auto-fit: o grid cria o máximo de colunas que couberem no espaço, se adaptando automaticamente (responsivo).
+     minmax(30rem, 1fr): cada coluna terá no mínimo 30rem de largura, mas pode crescer até ocupar 1 fração do espaço disponível.*/
+  gap: 2rem;       /* espaçamento entre os itens do grid */
   height: 70rem;
-  overflow: auto;
+  overflow: auto;  /* adiciona barra de rolagem se o conteúdo passar da altura */
 }
 
 .resume-list::-webkit-scrollbar {
@@ -418,12 +439,8 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 }
 
 .resume-list::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 1rem;
-}
-
-.resume-list:hover::-webkit-scrollbar-thumb {
   background: var(--main-color);
+  border-radius: 1rem;
 }
 
 .resume-list .resume-item {
@@ -454,8 +471,8 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 .resume-item .company::before {
   content: '';
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50%;                     /* Move a borda superior para 50% da altura do elemento pai.*/
+  transform: translateY(-50%);  /* Centraliza verticalmente o elemento, movendo-o para cima em 50% de sua própria altura.*/
   padding: .5rem;
   background: var(--main-color);
   border-radius: 50%;
@@ -463,7 +480,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 }
 
 .resume-detail.skills .resume-list {
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1 fr));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   height: auto;
   overflow: visible;
 }
@@ -485,15 +502,15 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 
 .resume-detail.skills .resume-item span {
   position: absolute;
-  top: -20%;
+  top: -20%;                      /* coloca o span acima do elemento (20% da altura dele) */
   background: var(--white-color);
   color: var(--bg-color);
   font-size: 1.6rem;
   padding: .5rem 1rem;
   border-radius: .6rem;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(.9);
+  pointer-events: none;           /* o mouse "ignora" o span (não clica nele) */
+  opacity: 0;                     /* começa invisível */
+  transform: scale(.9);           /* começa levemente menor (90%) */
   transition: .2s;
 }
 
@@ -510,7 +527,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 
 .resume-detail.about .resume-item {
   height: auto;
-  padding: 0 0 .5rem;
+  padding: 0 0 .5rem;  /* top; right and left; bottom*/
   background: transparent;
 }
 
@@ -521,7 +538,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 .resume-detail.about .resume-item p span {
   color: var(--white-color);
   margin-left: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .portfolio-container {
@@ -540,9 +557,9 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 
 .portfolio-box .numb {
   font-size: 8rem;
-  -webkit-text-stroke: .07rem var(--white-color);
-  color: transparent;
-  line-height: 1;
+  -webkit-text-stroke: .07rem var(--white-color); /* cria um contorno da fonte (stroke) de 0.07rem na cor branca */
+  color: transparent;         /* deixa o preenchimento da fonte transparente, mostrando apenas o contorno */
+  line-height: 1;             /* altura da linha igual à altura da fonte, evita espaçamento extra */
 }
 
 .portfolio-box h3 {
@@ -557,7 +574,7 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 .portfolio-box .tech {
   margin: 2rem 0;
   color: var(--main-color);
-  border-bottom: .1rem solid var(--white-color);
+  border-bottom: .1rem solid var(--white-color);  /* .1rem: espessura da linha; solid: estilo da linha; cor da linha*/
   padding-bottom: 2rem;
 }
 
@@ -615,9 +632,9 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 
 .portfolio-carousel .img-slide {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%;
-  gap: 2rem;
+  grid-auto-flow: column;   /* organiza os itens automaticamente em colunas, horizontalmente */
+  grid-auto-columns: 100%;  /* cada coluna terá 100% da largura do container */
+  gap: 2rem;                /* espaço entre cada coluna (slide) */
   height: inherit;
   transition: .5s;
 }
@@ -627,10 +644,10 @@ A função clamp(min, valor-preferido, max) define um tamanho responsivo e limit
 }
 
 .portfolio-carousel .img-item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;        /* remove espaços em linha que o <img> teria por padrão, tornando-o um bloco */
+  width: 100%;           /* a imagem ocupa 100% da largura do container pai (.img-item) */
+  height: 100%;          /* a imagem ocupa 100% da altura do container pai */
+  object-fit: cover;     /* mantém proporção da imagem, cortando partes se necessário para preencher o container */
   border-radius: 1rem;
 }
 
